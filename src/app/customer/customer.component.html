@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-5">
+
+    <form [formGroup]="this.customerService.form" (ngSubmit)="submitCustomerForm()">
+
+      <input type="hidden" formControlName="$key">
+
+      <div class="form-group">
+        <label>Full name</label>
+        <input formControlName="fullname" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.fullname.errors}">
+        <div class="invalid-feedback" *ngIf="submitted && formControls.fullname.errors">Full name is required!</div>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input formControlName="email" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.email.errors}">
+        <div class="invalid-feedback" *ngIf="submitted && formControls.email.errors">Enter a valid email!</div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone number</label>
+        <input formControlName="phone" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.phone.errors}">
+        <div  *ngIf="submitted && formControls.phone.errors" class="invalid-feedback">
+          <label *ngIf="submitted && formControls.phone.errors.required">Phone number is required!</label>
+          <label *ngIf="submitted && formControls.phone.errors.minlength">Invalid phone number!</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input formControlName="location" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Save">
+      </div>
+
+    </form>
+
+    <div *ngIf="showSuccessMessage" class="alert alert-info">Successfully saved!</div>
+
+  </div>
+
+  <div class="col-md-7">
+    <app-customer-list></app-customer-list>
+
+  </div>
+</div>
